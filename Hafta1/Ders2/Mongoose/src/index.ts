@@ -1,9 +1,9 @@
-import express,{ Request, Response, NextFunction} from "express"
+import express from "express"
+import userRouter from "./router/user.router"
+
 
 const app = express()
-
-app.use("/",(req:Request,res:Response,next:NextFunction)=>{
-    res.sendStatus(500)
-})
+app.use(express.json())
+app.use("/user",userRouter)
 
 export default app

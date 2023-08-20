@@ -15,21 +15,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/test')
     .catch(exception=>{
         console.error(exception)
     })
-    .finally(()=>{
-        dividedByTwo(
-            "dscvsdf",
-            (res:any)=>{
-                console.log(`result is ${res}`);      
-            },
-            ()=>{
-                console.log(`finally`);      
-            },
-            (exception)=>{
-                console.log(`exception is ${exception}`);      
-            }
-        ) 
-    })
-
 
 function dividedByTwo(v1:any,then:(res:any)=>void,customFinally:()=>void,customCatch:(exception:string)=>void){
     try{
