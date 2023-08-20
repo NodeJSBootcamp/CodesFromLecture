@@ -21,7 +21,7 @@ export const register = (req:Request,res:Response,next:NextFunction)=>{
 }
 
 export const login = (req:Request,res:Response,next:NextFunction)=>{
-    UserModel.findOne({username:req.body.username,password:req.body.password})
+    UserModel.findOne({username:req.body.username,password:req.body.password,isDeleted:false})
         .then((value)=>{
             if(value){
                 return generateToken({username:req.body.username,isAdmin:value.isAdmin})
@@ -37,8 +37,10 @@ export const login = (req:Request,res:Response,next:NextFunction)=>{
 }
 
 export const deleteUser = (req:Request,res:Response,next:NextFunction)=>{
-    UserModel.deleteOne({username:req.body.username})
+    UserModel.updateOne({username:req.body.username},{isDeleted:true})
         .then((result)=>{
+            console.log(result);
+            
             if(result){
                 res.sendStatus(200)
             }else{
@@ -50,3 +52,5 @@ export const deleteUser = (req:Request,res:Response,next:NextFunction)=>{
             res.sendStatus(500)
         })
 }
+
+//TODO Update user - not restirected to give all attributes (Middleware)
