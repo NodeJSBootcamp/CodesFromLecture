@@ -24,7 +24,7 @@ export const login = (req:Request,res:Response,next:NextFunction)=>{
     UserModel.findOne({username:req.body.username,password:req.body.password})
         .then((value)=>{
             if(value){
-                return generateToken({username:req.body.username})
+                return generateToken({username:req.body.username,isAdmin:value.isAdmin})
             }
         })
         .then((jwtToken)=>{

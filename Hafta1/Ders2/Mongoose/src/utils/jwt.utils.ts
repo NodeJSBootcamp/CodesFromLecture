@@ -1,9 +1,14 @@
-import jsonwebtoken from "jsonwebtoken"
-
-export const generateToken = (payload:object):string => {
-    return jsonwebtoken.sign(payload,"TechcareerNodeJSBootcamp",{expiresIn:1800})
+import jsonwebtoken, { JwtPayload } from "jsonwebtoken"
+const secretKey = "TechcareerNodeJSBootcamp"
+export const generateToken = (payload:TokenPayload):string => {
+    return jsonwebtoken.sign(payload,secretKey,{expiresIn:1800})
 }
 
-export const verifyToken = (token:string) => {
+export const verifyToken = (token:string):TokenPayload => {
+    return jsonwebtoken.verify(token,secretKey) as TokenPayload
+}
 
+export interface TokenPayload {
+    username:string
+    isAdmin:boolean
 }
