@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express"
-import { verifyToken } from "../src/utils/jwt.utils"
+import { verifyToken } from "../utils/jwt.utils"
 
 
 export const authtenticateForAdmin = (req:Request, res:Response, next:NextFunction) =>{
