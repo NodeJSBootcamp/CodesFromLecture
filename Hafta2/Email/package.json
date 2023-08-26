@@ -1,13 +1,10 @@
 {
-  "name": "supabase",
+  "name": "mongoose",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "config": {
-    "env_dev": ". ./env.sh"
-  },
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "nodemon --exec ts-node src/server.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,16 +13,17 @@
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/jsonwebtoken": "^9.0.2",
+    "@types/nodemailer": "^6.4.9",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.24.0",
     "body-parser": "^1.20.2",
-    "config": "^3.3.9",
     "crypto": "^1.0.1",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.1"
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.4.3",
+    "nodemailer": "^6.9.4"
   }
 }
