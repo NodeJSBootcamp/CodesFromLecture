@@ -19,10 +19,10 @@ export const emailSend = (to:string, subject:string, text:string, res:Response) 
     }
     transporter.sendMail(mailOptions,(err:Error | null,info:SentMessageInfo)=>{
         if(err){
-            console.log(err);
+            console.log(err)
             res.sendStatus(500)
         }else{
-            console.log("Email is sent to " + info);
+            console.log("Email is sent to " + info)
             res.sendStatus(200)
         }
     })

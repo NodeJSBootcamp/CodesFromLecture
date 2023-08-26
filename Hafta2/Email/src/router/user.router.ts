@@ -5,6 +5,7 @@ const userRouter = express.Router()
 
 
 userRouter.post("/register",userController.register)
+userRouter.post("/verify",userController.verify)
 userRouter.post("/login",userController.login)
 userRouter.post("/delete",[authtenticateForAdmin],userController.deleteUser)
 
