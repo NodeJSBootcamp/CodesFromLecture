@@ -1,6 +1,6 @@
 import express from "express"
 import userRouter from "./router/user.router"
-import { logError } from "../errorhandler/error.handler"
+import { logError } from "./errorhandler/error.handler"
 
 
 const app = express()
