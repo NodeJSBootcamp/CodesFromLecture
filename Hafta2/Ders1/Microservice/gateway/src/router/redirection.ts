@@ -12,7 +12,6 @@ router.use("/user/:path",async(req:Request,res:Response,next:NextFunction)=>{
                 port:8000,
             },
         })
-        
         const response = await instance.post("http://localhost:" + userServicePort +"/user/" + req.params.path,
           {
             username: req.body.username,
