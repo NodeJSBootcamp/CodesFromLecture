@@ -1,4 +1,5 @@
-import { login, register } from "../controller/user.controller"
+import { MercuriusContext } from "mercurius";
+import * as userController from "../controller/user.controller"
 import { getAllUsers } from "../resolvers/user.resolvers"
 
 const resolvers = {
@@ -9,11 +10,19 @@ const resolvers = {
     }
   },
   Mutation: {
-    register: async(username:string,password:string) =>{
-      return await register(username,password)
+    register: async(
+      _: unknown,
+      { username, password },
+      context: MercuriusContext
+    ) =>{
+      return await userController.register(username,password)
     },
-    login: async(username:string,password:string) =>{
-      return await login(username,password)
+    login: async(
+      _: unknown,
+      { username, password },
+      context: MercuriusContext
+    ) =>{
+      return await userController.login(username,password)
     }
   }
 }

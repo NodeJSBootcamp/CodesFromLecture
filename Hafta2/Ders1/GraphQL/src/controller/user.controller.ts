@@ -11,11 +11,8 @@ export const register = async(username:string,password:string):Promise<boolean>=
             username: username as string,
             password: password as string,
         }
-        const { data, error } = await supabase.from(userTable).insert([userData]).select()
+        const { data, error } = await supabase.from(userTable).insert(userData).select()
         if(error){
-            return false;
-        }
-        if(data.length == 0){
             return false;
         }
         return true;
