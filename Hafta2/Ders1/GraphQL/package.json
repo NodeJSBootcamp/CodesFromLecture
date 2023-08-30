@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "concurrently -c magenta 'tsc -w --preserveWatchOutput' 'sleep 3.3 && nodemon dist/index.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

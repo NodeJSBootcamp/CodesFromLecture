@@ -2,11 +2,11 @@
 const schema = `
   type Query {
     helloWorld: String!
-    userCollection(first: Int, after: String): ProjectConnection!
+    userCollection: userConnection!
   }
   type Mutation {
-    addProjectByName(name: String!, owner: String!): Boolean!
-    addProjectByUrl(url: String!): Boolean!
+    register(username: String!, password: String!): Boolean!
+    login(username: String!, password: String!): Boolean!
   }
   type userConnection {
     edges: [userEdge!]!
@@ -25,12 +25,12 @@ const schema = `
     startCursor: String
   }
   type user {
-    id: UUID!
+    id: String!
     username: String!
     password: String
     isAdmin: Boolean
     isDeleted: Boolean
-    created_at: Datetime!
+    created_at: String!
   }
 `
 
