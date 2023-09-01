@@ -8,7 +8,7 @@ import { createSocketConnection } from "./chat/chat";
 const app = express()
 app.use(express.json())
 const server = http.createServer(app);
-const io = new socketIo.Server(server);
+export const io = new socketIo.Server(server);
 app.use("/user",userRouter)
 app.use("/chat",chatRouter)
 

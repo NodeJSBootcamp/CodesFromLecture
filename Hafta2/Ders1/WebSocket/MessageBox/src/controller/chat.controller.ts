@@ -1,6 +1,8 @@
 import { Request,Response,NextFunction } from "express";
 import ChatModel from "../data/chat/chat.data";
 
+
+
 export const createGroup = (req:Request, res:Response, next:NextFunction) =>{
     ChatModel.create({groupName:req.body.groupName,admin:req.body.username})
         .then((response)=>{
