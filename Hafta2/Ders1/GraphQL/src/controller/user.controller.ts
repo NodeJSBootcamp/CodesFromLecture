@@ -1,9 +1,7 @@
 import { Request, Response, NextFunction} from "express"
-import { generateToken } from "../utils/jwt.utils"
 import { userTable } from "../utils/tables"
 import { UserInsertion } from "../../types/databaseAggregation"
 import supabase from "../database/supabase.client"
-import { log } from "console"
 
 export const register = async(username:string,password:string):Promise<boolean>=>{
     try{
