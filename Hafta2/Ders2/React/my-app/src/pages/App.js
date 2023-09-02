@@ -5,7 +5,7 @@ import Home from "./home/Home";
 import User from "./client/user/User";
 import Dashboard from "./admin/Dashboard"
 import ProtectedRoutes from "../components/protectedroutes/ProtectedRoutes";
-import Login from "./home/Login";
+import Login from "./home/login/Login";
 
 const router = createBrowserRouter([
   {

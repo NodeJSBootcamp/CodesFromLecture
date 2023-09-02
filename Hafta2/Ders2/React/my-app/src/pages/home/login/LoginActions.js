@@ -1,0 +1,5 @@
+export const UsernameChangeAction = "UsernameChange"
+export const PasswordChangeAction = "PasswordChange"
+export const EmailChangeAction = "EmailChange"
+export const FormTitleChangeAction = "FormTitleChange"
+export const UserInfoChangeAction = "UserInfoChange"

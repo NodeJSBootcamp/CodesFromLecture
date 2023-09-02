@@ -32,6 +32,8 @@ rl.on('line', (line) => {
         rl.close();
     }else if(line.toLocaleLowerCase() === 'add user'){
         socket.emit("add user",{username:"dogukan"})
+    }else if(line.toLocaleLowerCase().includes('message')){ //WARNING NOT TESTED
+        socket.emit("message",{message:line.replace("message","").trim()})
     }
     rl.prompt();
 });

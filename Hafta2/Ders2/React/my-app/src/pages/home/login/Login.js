@@ -1,32 +1,70 @@
-import { useEffect, useState } from "react"
-import CustomButton from "../../components/button/CustomButton"
-import { LoginTitle, RegisterTitle } from "../../constant/LoginConstant"
+import { useEffect, useState, useReducer } from "react"
+import CustomButton from "../../../components/button/CustomButton"
+import { LoginTitle, RegisterTitle } from "../../../constant/LoginConstant"
+import { EmailChangeAction, FormTitleChangeAction, PasswordChangeAction, UserInfoChangeAction, UsernameChangeAction } from "./LoginActions"
+
+const initialFormState = {
+    formTitle:LoginTitle,
+    email:"",
+    password:"",
+    username:"",
+    userInfo:""
+}
 
 const Login = () => {
-
-    const [formTitle, setFormTitle] = useState(LoginTitle)
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
     const [userInfo, setUserInfo] = useState("")
+    const [password, setPassword] = useState("")
     const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+
+    const formReducer = (state,action) =>{
+        if(action.type == UsernameChangeAction){
+            state = {
+                ...state,
+                username:action.username,
+            }
+        }else if(action.type === PasswordChangeAction){
+            state = {
+                ...state,
+                password:action.password,
+                userTitle:state.email + "-" + state.password
+            }
+        }else if(action.type === EmailChangeAction){
+            state = {
+                ...state,
+                email:action.email,
+                userTitle:state.email + "-" + state.password
+            }
+        }else if(action.type === FormTitleChangeAction){
+            state = {
+                ...state,
+                formTitle:action.formTitle,
+                userTitle:state.email + "-" + state.password
+            }
+        }else if(action.type === UserInfoChangeAction){
+            //TODO
+        }
+        return state
+    }
+
+    const [formState,dispatch] = useReducer(formReducer,initialFormState)
 
     useEffect(()=>{
         //TODO Içeride bulunan if else silindiğinde console log bir kez çalıştı, if else varken iki kez çalıştı
         //NEDEN ???
-        if(formTitle == LoginTitle){
-            setUserInfo("Email: " + email + "- Password: " + password) 
-        }else{
-            setUserInfo("Email: " + email + "- Password: " + password + "- Username: " + username) 
-        }
-        console.log("Userinfo has changed");
-    },[email,password,username,formTitle,userInfo])
+       if(formState.formTitle == LoginTitle){
+            setUserInfo("Email: " + email + "Password: " + password)
+       }else if(formState.formTitle == RegisterTitle){
+            setUserInfo("Email: " + email + "Password: " + password + "Username: " + username)
+       }
+    },[email,password,username,formState.formTitle,userInfo])
 
     const buttonClickHandler = (event) =>{
         event.preventDefault()
-        if(formTitle === LoginTitle){
-            setFormTitle(RegisterTitle)
+        if(formState.formTitle === LoginTitle){
+            dispatch({type:FormTitleChangeAction,formTitle:RegisterTitle})
         }else{
-            setFormTitle(LoginTitle)
+            dispatch({type:FormTitleChangeAction,formTitle:LoginTitle})
         }
     }
 
@@ -37,7 +75,7 @@ const Login = () => {
     return (
         <div className="bg-white py-6 sm:py-8 lg:py-12">
             <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
-                <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl">{formTitle.toUpperCase()}</h2>
+                <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl">{formState.formTitle.toUpperCase()}</h2>
 
                 <form className="mx-auto max-w-lg rounded-lg border">
                     <div className="flex flex-col gap-4 p-4 md:p-8">
@@ -46,7 +84,7 @@ const Login = () => {
                             <input name="email" onChange={(event)=>setEmail(event.target.value)} value={email} className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                         </div>
 
-                        { formTitle === RegisterTitle &&
+                        { formState.formTitle === RegisterTitle &&
                             <div>
                                 <label for="username" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Username</label>
                                 <input name="username" onChange={(event)=>setUsername(event.target.value)} value={username} className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
@@ -58,7 +96,7 @@ const Login = () => {
                             <label for="password" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Password</label>
                             <input name="password" onChange={passwordInputHandler} value={password} className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                         </div>
-                        <CustomButton onClick={buttonClickHandler} buttonText={formTitle} />
+                        <CustomButton onClick={buttonClickHandler} buttonText={formState.formTitle} />
 
                         <div className="relative flex items-center justify-center">
                             <span className="absolute inset-x-0 h-px bg-gray-300"></span>
