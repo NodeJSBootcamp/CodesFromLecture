@@ -2,6 +2,9 @@ import { useEffect, useState, useReducer } from "react"
 import CustomButton from "../../../components/button/CustomButton"
 import { LoginTitle, RegisterTitle } from "../../../constant/LoginConstant"
 import { EmailChangeAction, FormTitleChangeAction, PasswordChangeAction, UserInfoChangeAction, UsernameChangeAction } from "./LoginActions"
+import { useDispatch } from "react-redux"
+import { authActions } from "../../../store/auth_store"
+import store from "../../../store/redux_store"
 
 const initialFormState = {
     formTitle:LoginTitle,
@@ -16,6 +19,7 @@ const Login = () => {
     const [password, setPassword] = useState("")
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
+    const dispatchFromRedux = useDispatch()
 
     const formReducer = (state,action) =>{
         if(action.type == UsernameChangeAction){
@@ -61,11 +65,13 @@ const Login = () => {
 
     const buttonClickHandler = (event) =>{
         event.preventDefault()
-        if(formState.formTitle === LoginTitle){
+        console.log(store.getState())
+        dispatchFromRedux(authActions.login("test"))
+        /*if(formState.formTitle === LoginTitle){
             dispatch({type:FormTitleChangeAction,formTitle:RegisterTitle})
         }else{
             dispatch({type:FormTitleChangeAction,formTitle:LoginTitle})
-        }
+        }*/
     }
 
     const passwordInputHandler = (event) =>{

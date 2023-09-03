@@ -1,0 +1,7 @@
+Hafta 3 - Ödev 1
+
+1. Kullanıcı giriş ve kullanı kayıt olma sayfaları geliştirilecek. Tasarım sizin kararınız.
+2. Kullanıcı giriş şimdilik dummy data ile olacak.
+3. Giriş yaptıktan sonra kullanıcı dashboard'a yönlenecek.
+4. Dashboard'da left side bar olacak.
+5. Hata mesajları için toast veya side notification kullanılmalı.
