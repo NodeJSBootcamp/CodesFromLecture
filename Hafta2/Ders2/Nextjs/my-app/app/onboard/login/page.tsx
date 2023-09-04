@@ -1,15 +1,18 @@
 "use client"
 import { useAxiosWithoutAuthentication } from "@/helpers/withoutauth.axios.hook"
-import { useState } from "react"
+import { getDevUrl, loginEndpoint } from "@/network/endpoints"
+import NetworkManager from "@/network/network.manager"
+import { useEffect, useState } from "react"
 
 const Login = () => {
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
-    const networkManager = useAxiosWithoutAuthentication()
+    const networkManager:NetworkManager = useAxiosWithoutAuthentication()
 
     const handlerButtonOnClick = (event:React.MouseEvent<HTMLButtonElement>) =>{
         event.preventDefault()
-        networkManager.post("http://localhost:8000/user/login",{
+        //TODO password must be encrepted
+        networkManager.post(getDevUrl(loginEndpoint),{
             username:email,
             password:password
         })

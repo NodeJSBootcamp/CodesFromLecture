@@ -1,0 +1,4 @@
+Merhaba = Sifre -> Sifreleme -> backend gonder -> (register) -> database yaz
+Merhaba = Sifre -> Sifreleme -> backend gonder -> (login) -> database'den sifreyi alacaksiniz ve sifrelenmis olarak kontrol edeceksiniz
+database'den sifreyi alacaksiniz ve sifrelenmis olarak kontrol edeceksiniz = database where sorgusu atilabilir
+database'den sifreyi alacaksiniz ve sifrelenmis olarak kontrol edeceksiniz = database'den kullanici alinir ve kod uzerinde karsilastirma yapilir

@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, InternalAxiosRequestConfig } from "axios";
+import axios, { AxiosInstance, HttpStatusCode, InternalAxiosRequestConfig } from "axios";
 
 class NetworkManager {
     axiosInstance:AxiosInstance
