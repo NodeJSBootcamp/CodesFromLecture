@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  mongo:
+    image: mongo:latest
+    container_name: my-mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    ports:
+      - "27019:27019"
+    volumes:
+      - ./data:/data/db
+    networks:
+      - my-network
+  nextjs:
+    build:
+      context: ./packages/my-app # The path to your Next.js project's Dockerfile
+      dockerfile: ./Dockerfile
+    container_name: my-nextjs-app
+    command: npm run dev
+    ports:
+      - "3000:3000" # Map port 3000 from the host to the container
+    depends_on:
+      - expressjs
+    networks:
+      - my-network
+  expressjs:
+    build:
+      context: ./packages/Mongoose # The path to your Express.js project's Dockerfile
+      dockerfile: ./Dockerfile
+    container_name: my-express-app
+    ports:
+      - "8000:8000" # Map port 8000 from the host to the container
+    networks:
+      - my-network
+    depends_on:
+      - mongo
+networks:
+  my-network:
