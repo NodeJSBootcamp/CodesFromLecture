@@ -13,7 +13,7 @@ RUN npm install
 # Copy the rest of the application code
 COPY ./ .
 
-# Expose the port your Express.js app will run on (assuming port 3000)
+# Expose the port your Express.js app will run on (assuming port 000)
 EXPOSE 8000
 
 # Define the command to start your Express.js application
