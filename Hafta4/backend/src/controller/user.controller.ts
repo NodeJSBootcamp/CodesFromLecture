@@ -8,7 +8,7 @@ import dotenv from "dotenv"
 export const save = (req: Request, res: Response, next: NextFunction) => {
     const { username, password } = req.body
 
-    UserModel.create({ username: username, passsword: password }).then(
+    UserModel.create({ username: username, password: password }).then(
         (response) => {
             if (response) {
                 createUserPref(response._id, res)
@@ -33,7 +33,7 @@ export const save = (req: Request, res: Response, next: NextFunction) => {
 
 
 const createUserPref = (id: mongoose.Types.ObjectId, res: Response) => {
-    Userprefmodel.create({ userId: id })
+    Userprefmodel.create({ userId: id, email:"", gender: "", phone:"" })
         .then(
             (responseFromUserpref) => {
                 if (responseFromUserpref) {
@@ -45,8 +45,55 @@ const createUserPref = (id: mongoose.Types.ObjectId, res: Response) => {
         )
 }
 
-const updateUserPref= (req: Request, res: Response)=>{
+
+export const updateUserPref= (req: Request, res: Response, next: NextFunction)=>{
+    //const userId=req.userId;
+    const userId=req.body.userId
+     console.log("userId", userId)
     const {email, gender, phone}=req.body;
+
+    type UserObj={
+        email?: string,
+        gender?: string,
+        phone?: string
+
+    }
+    const obj: UserObj={}
+
+    if(email){
+        obj['email']=email
+    }
+
+    if(gender){
+        obj['gender']=gender
+    }
+    if(phone){
+        obj['phone']=phone
+    }
+
+     console.log("obje: ", obj)
+    const user= new mongoose.Types.ObjectId(userId)
+ console.log("user",user)
+    Userprefmodel.updateOne({userId: user}, obj).then((response)=>{
+         console.log(response)
+        if(!response || response.modifiedCount===0){
+            return res.status(500).json({message: "Update Error"})
+        }
+
+        // for(const key in obj ){
+
+        //     if(Object.prototype.hasOwnProperty.call(obj, key)){
+        //         if(obj[key as string]!==null){
+
+        //         }
+        //     }
+        // }
+        res.status(200).json({message:response})
+    }).catch((err)=>{
+         console.log(err)
+        res.status(500).json({message:err})
+
+    })
 
 }
 
@@ -64,7 +111,7 @@ export const login= (req: Request, res: Response)=>{
         if(!response){
             return res.status(500).json({message: "User not found"})
         }
-        const payload={userId: response._id.toString()}
+        const payload={userId: response._id}
         const token=JWT.sign(payload, process.env.JWT_SECRET_KEY ?? "", {expiresIn: "1d"})
 
         res.status(200).json({token})

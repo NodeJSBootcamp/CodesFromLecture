@@ -7,6 +7,8 @@ userRouter.use(express.json());
 
 userRouter.post("/save",UserController.save)
 userRouter.post("/login", UserController.login )
+userRouter.post("/update",verifyJWT, UserController.updateUserPref )
+
 
 
 export default userRouter
