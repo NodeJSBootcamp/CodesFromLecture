@@ -15,4 +15,6 @@ mongoose.connect(process.env.MONGODB_URL  ?? "")
     })
     .catch((err)=>{
         console.error(err)
+    }).finally(()=>{
+         console.log("Server is on!")
     })
