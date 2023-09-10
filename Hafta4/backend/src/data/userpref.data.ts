@@ -19,10 +19,6 @@ const userpref = new Schema (
 
         }
 
-
-
-
-
     }
 )
 
